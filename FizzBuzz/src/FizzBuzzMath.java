@@ -1,3 +1,4 @@
+package com.cognixia.jump.corejava.fizzbuzz;
 
 public class FizzBuzzMath implements Modulo {
 	
