@@ -1,3 +1,4 @@
+package com.cognixia.jump.corejava.fizzbuzz;
 import java.util.Arrays;
 
 public final class FizzBuzz extends FizzBuzzMath{
@@ -38,20 +39,26 @@ public final class FizzBuzz extends FizzBuzzMath{
 		String[] fizzBuzzArray = new String[fizzBuzzRange];
 		int divisorOne = getDivisorOne();
 		int divisorTwo = getDivisorTwo();
-		FizzBuzzMath fizzBuzzChecker = new FizzBuzzMath();
+		//FizzBuzzMath fizzBuzzChecker = new FizzBuzzMath();
 		
 		for (int i = 0; i < fizzBuzzArray.length; i++) {
-			if(fizzBuzzChecker.divisibilityCheckDivisors(i+1, divisorOne, divisorTwo)) {
+			//if(fizzBuzzChecker.divisibilityCheckDivisors(i+1, divisorOne, divisorTwo)) {
+			if(this.divisibilityCheckDivisors(i+1, divisorOne, divisorTwo)) {
+
 				fizzBuzzArray[i] = "FizzBuzz\n";
 			}
-			else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorOne)) {
+			//else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorOne)) {
+			else if(this.divisibilityCheck(i+1, divisorOne)) {
 				fizzBuzzArray[i] = "Fizz";
 			}
-			else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorTwo)) {
+			//else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorTwo)) {
+			else if(this.divisibilityCheck(i+1, divisorTwo)) {
+
 				fizzBuzzArray[i] = "Buzz";
 			}
 			else {
-				if(fizzBuzzChecker.isPrime(i+1)) {
+				//if(fizzBuzzChecker.isPrime(i+1)) {
+				if(this.isPrime(i+1)) {
 					//continue;
 					fizzBuzzArray[i] = " ";
 				}
