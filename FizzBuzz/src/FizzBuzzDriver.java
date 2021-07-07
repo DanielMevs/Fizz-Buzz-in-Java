@@ -1,11 +1,36 @@
+package com.cognixia.jump.corejava.fizzbuzz;
+import java.util.Scanner;
 
 public class FizzBuzzDriver {
 
 	public static void main(String[] args) {
 		
+		String playAnother = "y";
+		
+		//prompt
+		System.out.println("Welcome to fizz buzz! Enter a number you would like "
+				+ "to fizz-buzz to: ");
+		Scanner input = new Scanner(System.in);
+		
+		while(playAnother == "y") {
+			
+			int inputNumber = input.nextInt();
+			
+			//play a game as specified by the user:
+			FizzBuzz userDefinedGame = new FizzBuzz(inputNumber);
+			System.out.println("Your game: \n" + userDefinedGame);
+			
+			System.out.println("Would you like to play another game? "
+					+ "Enter y or n");
+			playAnother = input.next();
+			playAnother.toLowerCase();
+			
+		}
+		System.out.println("Happy coding!");
+		
 		//play a default game of FizzBuzz (up to 50)
-		FizzBuzz letsPlay = new FizzBuzz();
-		System.out.println(letsPlay);
+		//FizzBuzz letsPlay = new FizzBuzz();
+		//System.out.println(letsPlay);
 		
 		/*
 		//specifying that you want to play a game up to 100
