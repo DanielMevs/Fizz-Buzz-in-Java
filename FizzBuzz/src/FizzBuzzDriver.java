@@ -9,7 +9,7 @@ public class FizzBuzzDriver {
 		char playAnother = 'y';
 		
 		//prompt
-		System.out.println("Welcome to fizz buzz! Enter a number you would like "
+		System.out.println("Enter a number you would like "
 				+ "to fizz-buzz to: ");
 		Scanner input = new Scanner(System.in);
 		
@@ -36,7 +36,7 @@ public class FizzBuzzDriver {
 			}
 			else {
 				System.out.println("You've played " + userDefinedGame.getCount()
-						+ "games. You sure you're not bored of this game?");
+						+ "games. Are you sure you're not bored of this game?");
 			}
 			
 			System.out.println("Enter the number you would like to play to: ");
