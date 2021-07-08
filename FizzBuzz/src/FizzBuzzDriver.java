@@ -5,25 +5,30 @@ public class FizzBuzzDriver {
 
 	public static void main(String[] args) {
 		
-		String playAnother = "y";
+		char playAnother = 'y';
 		
 		//prompt
 		System.out.println("Welcome to fizz buzz! Enter a number you would like "
 				+ "to fizz-buzz to: ");
 		Scanner input = new Scanner(System.in);
 		
-		while(playAnother == "y") {
+		int inputNumber = input.nextInt();
+		
+		//play a game as specified by the user:
+		FizzBuzz userDefinedGame = new FizzBuzz(inputNumber);
+		
+		while(playAnother == 'y') {
 			
-			int inputNumber = input.nextInt();
 			
-			//play a game as specified by the user:
-			FizzBuzz userDefinedGame = new FizzBuzz(inputNumber);
 			System.out.println("Your game: \n" + userDefinedGame);
 			
 			System.out.println("Would you like to play another game? "
 					+ "Enter y or n");
-			playAnother = input.next();
-			playAnother.toLowerCase();
+			playAnother = input.next().charAt(0);
+			System.out.println("Enter the number you would like to play to: ");
+			inputNumber = input.nextInt();
+			userDefinedGame.setNumberOfDividends(inputNumber);
+			
 			
 		}
 		System.out.println("Happy coding!");
