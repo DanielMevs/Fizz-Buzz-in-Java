@@ -18,14 +18,22 @@ public class FizzBuzzDriver {
 		//play a game as specified by the user:
 		FizzBuzz userDefinedGame = new FizzBuzz(inputNumber);
 		
+		System.out.println("Your game: \n" + userDefinedGame);
+		
+		System.out.println("Would you like to play another game? "
+				+ "Enter y or n");
+		playAnother = input.next().charAt(0);
+		
 		while(playAnother == 'y') {
 			
-			
-			System.out.println("Your game: \n" + userDefinedGame);
+			System.out.println("Enter the number you would like to play to: ");
+			inputNumber = input.nextInt();
+			userDefinedGame.setNumberOfDividends(inputNumber);
 			
 			System.out.println("Would you like to play another game? "
 					+ "Enter y or n");
 			playAnother = input.next().charAt(0);
+			
 			if(userDefinedGame.getCount() == 1) {
 				System.out.println("You've played " + userDefinedGame.getCount()
 						+ " game.");
@@ -38,12 +46,7 @@ public class FizzBuzzDriver {
 				System.out.println("You've played " + userDefinedGame.getCount()
 						+ "games. Are you sure you're not bored of this game?");
 			}
-			
-			System.out.println("Enter the number you would like to play to: ");
-			inputNumber = input.nextInt();
-			userDefinedGame.setNumberOfDividends(inputNumber);
-			
-			
+				
 		}
 		System.out.println("Happy coding!");
 		
@@ -63,9 +66,7 @@ public class FizzBuzzDriver {
 		//replace the divisors 3, 5 with 2, 7, respectively
 		FizzBuzz changeRules2 = new FizzBuzz(50, 2, 7);
 		System.out.println(changeRules2);
-		*/
-		
-		
+				*/
 
 	}
 
