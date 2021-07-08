@@ -1,15 +1,12 @@
 package com.cognixia.jump.corejava.fizzbuzz;
 import java.util.Arrays;
-
+​
 public final class FizzBuzz extends FizzBuzzMath{
 	
 	private int divisorOne;
 	private int divisorTwo;
 	private int numberOfDividends;
 	private static int gamesPlayed = 0;
-
-	public static int getGamesPlayed() {
-		return gamesPlayed;
 	
 	public FizzBuzz() {
 		setNumberOfDividends(50);
@@ -32,6 +29,10 @@ public final class FizzBuzz extends FizzBuzzMath{
 		setDivisorTwo(divisorTwo);
 	}
 	
+	static {
+		System.out.println("Welcome to FizzBuzz!");
+	}
+	
 	@Override
 	public String toString() {
 		return Arrays.toString(this.generateFizzBuzz());
@@ -47,7 +48,7 @@ public final class FizzBuzz extends FizzBuzzMath{
 		for (int i = 0; i < fizzBuzzArray.length; i++) {
 			//if(fizzBuzzChecker.divisibilityCheckDivisors(i+1, divisorOne, divisorTwo)) {
 			if(this.divisibilityCheckDivisors(i+1, divisorOne, divisorTwo)) {
-
+​
 				fizzBuzzArray[i] = "FizzBuzz\n";
 			}
 			//else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorOne)) {
@@ -56,7 +57,7 @@ public final class FizzBuzz extends FizzBuzzMath{
 			}
 			//else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorTwo)) {
 			else if(this.divisibilityCheck(i+1, divisorTwo)) {
-
+​
 				fizzBuzzArray[i] = "Buzz";
 			}
 			else {
@@ -76,7 +77,7 @@ public final class FizzBuzz extends FizzBuzzMath{
 	public int getNumberOfDividends() {
 		return numberOfDividends;
 	}
-
+​
 	public void setNumberOfDividends(int numberOfDividends) {
 		this.numberOfDividends = numberOfDividends;
 		gamesPlayed++;
@@ -85,20 +86,20 @@ public final class FizzBuzz extends FizzBuzzMath{
 	public int getDivisorOne() {
 		return divisorOne;
 	}
-
+​
 	public void setDivisorOne(int divisorOne) {
 		this.divisorOne = divisorOne;
 	}
-
+​
 	public int getDivisorTwo() {
 		return divisorTwo;
 	}
-
+​
 	public void setDivisorTwo(int divisorTwo) {
 		this.divisorTwo = divisorTwo;
 	}
 	public int getCount() {
-		return this.gamesPlayed;
+		return gamesPlayed;
 	}
-
+​
 }
