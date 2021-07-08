@@ -6,8 +6,11 @@ public final class FizzBuzz extends FizzBuzzMath{
 	private int divisorOne;
 	private int divisorTwo;
 	private int numberOfDividends;
-	
+	private static int gamesPlayed = 0;
 
+	public static int getGamesPlayed() {
+		return gamesPlayed;
+	
 	public FizzBuzz() {
 		setNumberOfDividends(50);
 		setDivisorOne(3);
@@ -76,6 +79,7 @@ public final class FizzBuzz extends FizzBuzzMath{
 
 	public void setNumberOfDividends(int numberOfDividends) {
 		this.numberOfDividends = numberOfDividends;
+		gamesPlayed++;
 	}
 	
 	public int getDivisorOne() {
@@ -92,6 +96,9 @@ public final class FizzBuzz extends FizzBuzzMath{
 
 	public void setDivisorTwo(int divisorTwo) {
 		this.divisorTwo = divisorTwo;
+	}
+	public int getCount() {
+		return this.gamesPlayed;
 	}
 
 }
