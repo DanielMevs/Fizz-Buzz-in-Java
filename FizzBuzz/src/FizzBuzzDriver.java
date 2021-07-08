@@ -1,6 +1,7 @@
 package com.cognixia.jump.corejava.fizzbuzz;
 import java.util.Scanner;
 
+
 public class FizzBuzzDriver {
 
 	public static void main(String[] args) {
@@ -25,6 +26,19 @@ public class FizzBuzzDriver {
 			System.out.println("Would you like to play another game? "
 					+ "Enter y or n");
 			playAnother = input.next().charAt(0);
+			if(userDefinedGame.getCount() == 1) {
+				System.out.println("You've played " + userDefinedGame.getCount()
+						+ " game.");
+			}
+			else if(userDefinedGame.getCount() < 50) {
+				System.out.println("You've played " + userDefinedGame.getCount()
+						+ " games.");
+			}
+			else {
+				System.out.println("You've played " + userDefinedGame.getCount()
+						+ "games. You sure you're not bored of this game?");
+			}
+			
 			System.out.println("Enter the number you would like to play to: ");
 			inputNumber = input.nextInt();
 			userDefinedGame.setNumberOfDividends(inputNumber);
