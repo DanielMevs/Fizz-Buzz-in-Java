@@ -1,0 +1,17 @@
+FizzBuzz 3.0:
+TODOS:
+-modularize driver class.
+- add hashtable. 
+-add a static method that evaluates the default number of fizz 
+buzz games and holds that value in that hashtable with the default number of games
+as the key.
+
+CAVEATS:
+For any user defined game less than the default number of games,
+simply retrieve the existing game and trim the difference off the 
+end.
+For any game/key greater than the max key of the hash table, lets say n, make that
+the new max key by simulating a game from i = current max to i = n and append that to the value of the former
+max key.
+This new max will offer the same afore-mention logic to any future 
+user-defined games.

@@ -1,32 +1,39 @@
 package com.cognixia.jump.corejava.fizzbuzz;
-import java.util.Arrays;
-​
+import java.util.Hashtable;
+
 public final class FizzBuzz extends FizzBuzzMath{
 	
 	private int divisorOne;
 	private int divisorTwo;
-	private int numberOfDividends;
+	public int numberOfDividends;
 	private static int gamesPlayed = 0;
+	private static Hashtable<String, String> gamesMap = new 
+			Hashtable<String, String>(); 
 	
 	public FizzBuzz() {
-		setNumberOfDividends(50);
-		setDivisorOne(3);
-		setDivisorTwo(5);
+		
+		setNumberOfDividends(100);
+		setDivisors(3, 5);
+		
 	}
+	
 	public FizzBuzz(int numberOfDividends) {
+		
 		setNumberOfDividends(numberOfDividends);
-		setDivisorOne(3);
-		setDivisorTwo(5);
+		setDivisors(3, 5);
 	}
+	
 	public FizzBuzz(int numberOfDividends, int divisorOne) {
+		
 		setNumberOfDividends(numberOfDividends);
-		setDivisorOne(divisorOne);
-		setDivisorTwo(5);
+		setDivisors(divisorOne, 5);
+
 	}
 	public FizzBuzz(int numberOfDividends, int divisorOne, int divisorTwo) {
+		
 		setNumberOfDividends(numberOfDividends);
-		setDivisorOne(divisorOne);
-		setDivisorTwo(divisorTwo);
+		setDivisors(divisorOne, divisorTwo);
+		
 	}
 	
 	static {
@@ -35,71 +42,131 @@ public final class FizzBuzz extends FizzBuzzMath{
 	
 	@Override
 	public String toString() {
-		return Arrays.toString(this.generateFizzBuzz());
+		loadFizzBuzz();
+		String fizzBuzzStr = gamesMap.get(getCurrentKey());
+		return fizzBuzzStr.substring(0, fizzBuzzStr.length()-2);
+		
 	}
 	
-	private String[] generateFizzBuzz() {
-		int fizzBuzzRange = getNumberOfDividends();
-		String[] fizzBuzzArray = new String[fizzBuzzRange];
-		int divisorOne = getDivisorOne();
-		int divisorTwo = getDivisorTwo();
-		//FizzBuzzMath fizzBuzzChecker = new FizzBuzzMath();
+	private String evaluateFizzBuzz(int dividend) {
 		
-		for (int i = 0; i < fizzBuzzArray.length; i++) {
-			//if(fizzBuzzChecker.divisibilityCheckDivisors(i+1, divisorOne, divisorTwo)) {
-			if(this.divisibilityCheckDivisors(i+1, divisorOne, divisorTwo)) {
-​
-				fizzBuzzArray[i] = "FizzBuzz\n";
-			}
-			//else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorOne)) {
-			else if(this.divisibilityCheck(i+1, divisorOne)) {
-				fizzBuzzArray[i] = "Fizz";
-			}
-			//else if(fizzBuzzChecker.divisibilityCheck(i+1, divisorTwo)) {
-			else if(this.divisibilityCheck(i+1, divisorTwo)) {
-​
-				fizzBuzzArray[i] = "Buzz";
+		if(divisibilityCheckDivisors(dividend, divisorOne, divisorTwo)) {
+
+			return "FizzBuzz\n ";
+		}
+		else if(divisibilityCheck(dividend, divisorOne)) {
+			return "Fizz, ";
+		}
+		else if(divisibilityCheck(dividend, divisorTwo)) {
+
+			return "Buzz, ";
+		}
+		else {
+			if(this.isPrime(dividend)) {
+				return "X, ";
 			}
 			else {
-				//if(fizzBuzzChecker.isPrime(i+1)) {
-				if(this.isPrime(i+1)) {
-					//continue;
-					fizzBuzzArray[i] = " ";
+				return String.valueOf(dividend) + ", ";
+			}
+		}
+	}
+	
+	private void loadFizzBuzz() {
+		
+		if(gamesMap.isEmpty()) {
+			String fizzBuzzString = generateFizzBuzz(0, numberOfDividends);
+			//put the maximum-value for that current divisor configuration
+			gamesMap.put(getMaxDivisorPairKey(), 
+					String.valueOf(numberOfDividends));
+			gamesMap.put(getCurrentKey(), fizzBuzzString);			
+		}
+		else if(!(gameAlreadyExists(getCurrentKey()))) {
+			
+			if(!(gamesMap.containsKey(getMaxDivisorPairKey()))) {
+				
+				String fizzBuzzString = generateFizzBuzz(0, numberOfDividends);
+				gamesMap.put(getMaxDivisorPairKey(), 
+						String.valueOf(numberOfDividends));
+				gamesMap.put(getCurrentKey(), fizzBuzzString);	
+			}
+			else {
+				int currentMax = getMaxDividend(
+						gamesMap.get(getMaxDivisorPairKey())
+						); 
+				if(numberOfDividends > currentMax) {
+					
+					gamesMap.replace(getMaxDivisorPairKey(),
+							String.valueOf(numberOfDividends));
+					int difference  = numberOfDividends - currentMax;
+					String subString = generateFizzBuzz(currentMax, 
+							currentMax + difference);	
+					String fizzBuzzString = gamesMap.get(
+							getExistingGameKey(currentMax)) + subString;
+					gamesMap.put(getCurrentKey(), fizzBuzzString);
 				}
 				else {
-					fizzBuzzArray[i] = String.valueOf(i+1);
+					String wholeString = gamesMap.get(getExistingGameKey(currentMax));
+					String fizzBuzzString = wholeString.substring(0, numberOfDividends);
+					gamesMap.put(getCurrentKey(), fizzBuzzString);
 				}
 			}
 		}
-		return fizzBuzzArray;
+		else {
+			return;
+		}
+	}
+	private String getExistingGameKey(int formerMax) {
+		return getMaxDivisorPairKey() + formerMax;
+	}
+	private String generateFizzBuzz(int startIdx, int endIdx) {
+		String fizzBuzzString = " ";
+		for (int i = startIdx; i < endIdx; i++) {
+			fizzBuzzString += evaluateFizzBuzz(i + 1);
+		}
+		return fizzBuzzString;
 	}
 	
-	public int getNumberOfDividends() {
-		return numberOfDividends;
+	public boolean gameAlreadyExists(String gameKey) {
+		return gamesMap.containsKey(gameKey);
 	}
-​
-	public void setNumberOfDividends(int numberOfDividends) {
-		this.numberOfDividends = numberOfDividends;
-		gamesPlayed++;
+	
+	
+	private String getCurrentKey() {
+		
+		return divisorOne+"/"+getMaxDivisorPairKey();
+	}
+	
+	private String getMaxDivisorPairKey() {
+		return ""+divisorOne+divisorTwo;
+	}
+	
+	//for comparing values if not in table/ decoding
+	public int getMaxDividend(String maxDividendKey) {
+		return Integer.parseInt(gamesMap.get(maxDividendKey));
 	}
 	
 	public int getDivisorOne() {
 		return divisorOne;
 	}
-​
-	public void setDivisorOne(int divisorOne) {
-		this.divisorOne = divisorOne;
-	}
-​
+
 	public int getDivisorTwo() {
 		return divisorTwo;
 	}
-​
-	public void setDivisorTwo(int divisorTwo) {
+
+	public void setDivisors(int divisorOne, int divisorTwo) {
+		this.divisorOne = divisorOne;
 		this.divisorTwo = divisorTwo;
+		
 	}
+		
+	public void setNumberOfDividends(int numberOfDividends) {
+		this.numberOfDividends = numberOfDividends;
+		gamesPlayed++;
+		
+	}
+	
 	public int getCount() {
 		return gamesPlayed;
 	}
-​
+
 }
