@@ -4,12 +4,13 @@ import java.util.Hashtable;
 public final class FizzBuzz extends FizzBuzzMath{
 	
 	private int divisorOne;
-	private int divisorTwo;
+	public int divisorTwo;
 	public int numberOfDividends;
 	private static int gamesPlayed = 0;
 	private static Hashtable<String, String> gamesMap = new 
 			Hashtable<String, String>(); 
-	
+	//"33/3/5"
+	//"44/5/6"
 	public FizzBuzz() {
 		
 		setNumberOfDividends(100);
@@ -78,10 +79,11 @@ public final class FizzBuzz extends FizzBuzzMath{
 			//put the maximum-value for that current divisor configuration
 			gamesMap.put(getMaxDivisorPairKey(), 
 					String.valueOf(numberOfDividends));
-			gamesMap.put(getCurrentKey(), fizzBuzzString);			
+			gamesMap.put(getCurrentKey(), fizzBuzzString);	
+			System.out.println("GAME MAP IS EMPTY");
 		}
 		else if(!(gameAlreadyExists(getCurrentKey()))) {
-			
+			System.out.println("ENTERED ELSE IF STATEMENT");
 			if(!(gamesMap.containsKey(getMaxDivisorPairKey()))) {
 				
 				String fizzBuzzString = generateFizzBuzz(0, numberOfDividends);
@@ -112,6 +114,7 @@ public final class FizzBuzz extends FizzBuzzMath{
 			}
 		}
 		else {
+			System.out.println("Entered this else");
 			return;
 		}
 	}
@@ -133,7 +136,7 @@ public final class FizzBuzz extends FizzBuzzMath{
 	
 	private String getCurrentKey() {
 		
-		return divisorOne+"/"+getMaxDivisorPairKey();
+		return numberOfDividends+"/"+getMaxDivisorPairKey();
 	}
 	
 	private String getMaxDivisorPairKey() {
@@ -142,6 +145,11 @@ public final class FizzBuzz extends FizzBuzzMath{
 	
 	//for comparing values if not in table/ decoding
 	public int getMaxDividend(String maxDividendKey) {
+		String test= gamesMap.get(maxDividendKey);
+		if(test == null) {
+			System.out.println("Max dividend key does not exist");
+			return -1;
+		}
 		return Integer.parseInt(gamesMap.get(maxDividendKey));
 	}
 	
